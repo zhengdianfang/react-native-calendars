@@ -3,7 +3,8 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  View
+  View,
+  TouchableHighlight,
 } from 'react-native';
 import {Calendar} from 'react-native-calendars';
 
@@ -13,15 +14,46 @@ export default class CalendarsScreen extends Component {
     this.state = {};
     this.onDayPress = this.onDayPress.bind(this);
   }
-
+  calendar: any
+  handleLeftButton = () => {
+    console.log('left');
+    if(this.calendar) {
+      this.calendar.addMonth(-1);
+    }
+  }
+  handleRightButton = () => {
+    console.log('right');
+    if(this.calendar) {
+      this.calendar.addMonth(1);
+    }
+  }
+  handleUpdateMonthButton = () => {
+    console.log('now');
+    if(this.calendar) {
+      this.calendar.updateMonth('2017-12-13T14:27:17+08:00');
+    }
+  }
   render() {
     return (
       <ScrollView style={styles.container}>
+       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
+        <TouchableHighlight onPress={this.handleLeftButton}>
+            <Text>Left</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={this.handleUpdateMonthButton}>
+            <Text>Middle</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={this.handleRightButton}>
+            <Text>Right</Text>
+          </TouchableHighlight>
+       </View>
         <Text style={styles.text}>Calendar with selectable date and arrows</Text>
         <Calendar
+          ref={ref=>this.calendar=ref}
           onDayPress={this.onDayPress}
           style={styles.calendar}
           hideExtraDays
+          hideMonthView
           markedDates={{[this.state.selected]: {selected: true}}}
         />
         <Text style={styles.text}>Calendar with marked dates and hidden arrows</Text>
