@@ -118,6 +118,10 @@ class Calendar extends Component {
     });
   }
 
+  getCurrentMonth() {
+    return this.state.currentMonth;
+  }
+
   pressDay(date) {
     const day = parseDate(date);
     const minDate = parseDate(this.props.minDate);

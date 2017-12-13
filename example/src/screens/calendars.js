@@ -11,7 +11,9 @@ import {Calendar} from 'react-native-calendars';
 export default class CalendarsScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentMonth: '',
+    };
     this.onDayPress = this.onDayPress.bind(this);
   }
   calendar: any
@@ -19,12 +21,18 @@ export default class CalendarsScreen extends Component {
     console.log('left');
     if(this.calendar) {
       this.calendar.addMonth(-1);
+      this.setState({
+        currentMonth: this.calendar.getCurrentMonth()
+      });
     }
   }
   handleRightButton = () => {
     console.log('right');
     if(this.calendar) {
       this.calendar.addMonth(1);
+      this.setState({
+        currentMonth: this.calendar.getCurrentMonth()
+      });
     }
   }
   handleUpdateMonthButton = () => {
@@ -41,7 +49,7 @@ export default class CalendarsScreen extends Component {
             <Text>Left</Text>
           </TouchableHighlight>
           <TouchableHighlight onPress={this.handleUpdateMonthButton}>
-            <Text>Middle</Text>
+            <Text>{this.state.currentMonth.toString()}</Text>
           </TouchableHighlight>
           <TouchableHighlight onPress={this.handleRightButton}>
             <Text>Right</Text>
@@ -53,7 +61,7 @@ export default class CalendarsScreen extends Component {
           onDayPress={this.onDayPress}
           style={styles.calendar}
           hideExtraDays
-          hideMonthView
+          // hideMonthView
           markedDates={{[this.state.selected]: {selected: true}}}
         />
         <Text style={styles.text}>Calendar with marked dates and hidden arrows</Text>
