@@ -65,6 +65,8 @@ class Calendar extends Component {
     disableMonthChange: PropTypes.bool,
     //Hide day names. Default = false
     hideDayNames: PropTypes.bool,
+    //Hide Month View. Default = false
+    hideMonthView: PropTypes.bool,
     //Disable days by default. Default = false
     disabledByDefault: PropTypes.bool
   };
