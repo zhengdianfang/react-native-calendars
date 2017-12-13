@@ -100,11 +100,11 @@ class Calendar extends Component {
   }
 
   updateMonth(day, doNotTriggerListeners) {
-    if (day.toString('yyyy MM') === this.state.currentMonth.toString('yyyy MM')) {
+    if (XDate(day).toString('yyyy MM') === this.state.currentMonth.toString('yyyy MM')) {
       return;
     }
     this.setState({
-      currentMonth: day.clone()
+      currentMonth: XDate(day).clone()
     }, () => {
       if (!doNotTriggerListeners) {
         const currMont = this.state.currentMonth.clone();
